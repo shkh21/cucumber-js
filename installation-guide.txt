@@ -1,0 +1,64 @@
+1. Create project folder on your pc
+2. Open the folder in visual studio code.
+3. Open visual studion terminal
+4. Type: npm init
+5. npm install --save-dev @cucumber/cucumber
+6. npm install selenium-webdriver
+7. npm install chromedriver
+8. Goto package.json and update the test under scripts section:
+  "scripts": {
+    "test": "cucumber-js --publish test"
+  },
+9. Install gherkin plugin from extensions of visual studio code marketplace.
+10. In ur project, create a test folder. And inside test folder, create two folders: features, step-definitions.
+11. Create a new file 'stefdef.js' inside step-definitions folder and write:
+const { assert } = require('assert');
+const { Given, When, Then, AfterAll } = require('@cucumber/cucumber');
+const{Builder, By, until}=require('selenium-webdriver');
+
+12. Create a new file 'sample.feature' inside features folder and write your scenarios here:
+Feature: Cucumber Testing
+
+    Testing of library app
+
+    Scenario: Test email field
+    Given User is on library app page
+    When User enter email in email field
+    And Clicks on invitation button
+    Then Display success message
+
+13. In terminal type: npm test. It will generate methods for step-definitions based on your feature file. Copy the methods from the terminals and paste it in your step-definitions file(stefdef.js).
+Ex: Given('User is on library app page', async function () {
+    // Write code here that turns the phrase above into concrete actions
+});
+
+
+
+When('User enter email in email field',async function () {
+    // Write code here that turns the phrase above into concrete actions
+
+});
+
+
+When('Clicks on invitation button',async function () {
+    // Write code here that turns the phrase above into concrete actions
+});
+
+
+Then('Display success message',async function () {
+    // Write code here that turns the phrase above into concrete actions
+    
+});
+
+14. After that write the below method in your step-definitions file (stefdef.js):
+AfterAll(async function(){
+    driver.quit();
+});
+
+15. Now goto terminal and type: npm test.
+A report will also be generated after the test execution. 
+Ex:
+ View your Cucumber Report at:                                            │
+│ https://reports.cucumber.io/reports/1879ed55-1d0c-4b9c-8d20-ddc4b246e113 
+
+You can view the report in your browser.
